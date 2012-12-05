@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block meta_title %}
+	RatFeeder
+{% endblock %}
+
+{% block body %}
+
+	<div data-role="content">
+
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#" data-url="rotate">Rotate</a></li>
+			<li><a href="#" data-url="rotate_stop">Stop rotating</a></li>
+			<li><a href="#" data-url="rotate_time?time=1000">Rotate for 1 second</a></li>
+			<li><a href="#" data-url="rotate_time?time=3000">Rotate for 3 seconds</a></li>
+			<li><a href="#" data-url="rotate_time?time=5000">Rotate for 5 seconds</a></li>
+			<li><a href="#" data-url="rotate_cw">Set rotation CW</a></li>
+			<li><a href="#" data-url="rotate_ccw">Set rotation CCW</a></li>
+		</ul>
+
+	</div>
+
+	<div data-role="footer" data-position="fixed">
+		<h3>&copy; 2012 - RatFeeder</h3>
+	</div>
+
+	<script type="text/javascript">
+		jQuery('li').tap(function(e) {
+			var el = jQuery(e.target);
+			var parent = el.parent().parent().parent();
+			parent.addClass('ui-btn-active');
+
+			var url = el.attr('data-url');
+			jQuery.ajax({
+  				url: url
+  			}).always(function() { parent.removeClass('ui-btn-active');; });
+
+
+			return false;
+		});
+	</script>
+
+{% endblock %}
